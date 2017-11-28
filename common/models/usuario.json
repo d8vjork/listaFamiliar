@@ -1,0 +1,51 @@
+{
+  "name": "Usuario",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "owner": {
+      "type": "hasOne",
+      "model": "ListaFamiliar",
+      "foreignKey": "owner"
+    },
+    "solicitudes": {
+      "type": "hasAndBelongsToMany",
+      "model": "ListaFamiliar",
+      "foreignKey": ""
+    },
+    "listaFamiliar": {
+      "type": "belongsTo",
+      "model": "ListaFamiliar",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    }
+  ],
+  "methods": {}
+}
